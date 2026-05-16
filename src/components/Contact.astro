@@ -17,7 +17,7 @@ const planItems = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
       <div class="contact-info">
         <h2 class="text-white font-extrabold mb-4 text-left" style="font-size: clamp(2rem, 5vw, 3rem);">
-          {t.contact.title} <span class="bg-gradient-to-br from-purple-400 to-blue-400 bg-clip-text text-transparent">{t.contact.titleAccent}</span>
+          {t.contact.title} <span class="bg-linear-to-br from-purple-400 to-blue-400 bg-clip-text text-transparent">{t.contact.titleAccent}</span>
         </h2>
         <p class="text-lg text-purple-200/60 leading-relaxed mb-10">
           {t.contact.desc}
@@ -73,7 +73,7 @@ const planItems = [
             <MessageSquare class="absolute left-4 top-4 text-purple-400/50 pointer-events-none" size={18} />
             <textarea placeholder={t.contact.formMsg} rows="4" class="w-full pl-11 pr-5 py-3.5 rounded-xl bg-white/5 border border-purple-400/20 text-white text-[0.95rem] outline-none transition-all duration-300 placeholder:text-white/30 focus:border-purple-400 focus:bg-white/8 focus:shadow-[0_0_0_3px_rgba(139,26,255,0.15)] resize-y min-h-[100px]"></textarea>
           </div>
-          <button type="submit" class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-gradient-to-br from-purple-600 to-purple-500 text-white no-underline rounded-xl font-semibold text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,26,255,0.3)] cursor-pointer border-none">
+          <button type="submit" class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-linear-to-br from-purple-600 to-purple-500 text-white no-underline rounded-xl font-semibold text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,26,255,0.3)] cursor-pointer border-none">
             <Send size={18} />
             <span>{t.contact.formBtn}</span>
           </button>
@@ -86,10 +86,12 @@ const planItems = [
 <script>
   document.getElementById("contactForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const name = e.target.querySelector('input[type="text"]').value;
-    const message = e.target.querySelector("textarea").value;
-    const plan = document.getElementById("planValue")?.value || "";
-    const planText = plan ? document.querySelector(`.option-btn[data-value="${plan}"] span`)?.textContent || "" : "";
+    const form = /** @type {HTMLFormElement} */ (e.currentTarget);
+    const name = /** @type {HTMLInputElement} */ (form.querySelector('input[type="text"]')).value;
+    const message = /** @type {HTMLTextAreaElement} */ (form.querySelector("textarea")).value;
+    const plan = /** @type {HTMLInputElement} */ (document.getElementById("planValue"))?.value || "";
+    const btn = /** @type {HTMLElement} */ (document.querySelector(`.option-btn[data-value="${plan}"]`));
+    const planText = plan ? btn?.querySelector("span")?.textContent || "" : "";
     const text = `Hola! Soy ${name}. ${plan ? `Me interesa ${planText}. ` : ""}${message ? `Mi proyecto: ${message}` : "Quiero una cotización"}`;
     window.open(`https://wa.me/573502815267?text=${encodeURIComponent(text)}`, "_blank");
   });
