@@ -1,5 +1,6 @@
 ---
 import { getLocale, getTranslations } from "../i18n";
+import { Rocket, Crown, Building, Check, MessageCircleWarning, Sparkles } from "@lucide/astro";
 const locale = getLocale(Astro.url.pathname);
 const t = getTranslations(locale);
 const servicesId = locale === "es" ? "#servicios" : "#servicios";
@@ -17,7 +18,9 @@ const servicesId = locale === "es" ? "#servicios" : "#servicios";
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 max-w-[400px] md:max-w-none mx-auto">
       <div class="plan-card flex flex-col items-center text-center p-10 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:border-purple-400/25 hover:shadow-[0_20px_60px_rgba(99,102,241,0.08)]">
-        <div class="text-4xl mb-4">🚀</div>
+        <div class="w-14 h-14 rounded-xl bg-purple-500/15 flex items-center justify-center mb-4">
+          <Rocket class="text-purple-400" size={28} />
+        </div>
         <h3 class="text-xl font-bold text-white mb-2">{t.services.basico.name}</h3>
         <p class="text-sm text-purple-200/60 mb-6">{t.services.basico.desc}</p>
         <div class="mb-6">
@@ -25,17 +28,20 @@ const servicesId = locale === "es" ? "#servicios" : "#servicios";
         </div>
         <ul class="w-full mb-8 flex-1 space-y-0">
           {t.services.basico.features.map((f: string) => (
-            <li class="py-3 text-sm text-purple-200/60 border-b border-[rgba(148,139,165,0.1)]">✓ {f}</li>
+            <li class="py-3 text-sm text-purple-200/60 border-b border-[rgba(148,139,165,0.1)] flex items-center gap-2"><Check class="text-purple-400 shrink-0" size={14} />{f}</li>
           ))}
         </ul>
         <a href={`https://wa.me/573502815267?text=${t.services.basico.wa}`} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full px-8 py-3.5 bg-gradient-to-br from-purple-600 to-purple-500 text-white no-underline rounded-xl font-semibold text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,26,255,0.3)]">
+          <MessageCircleWarning size={18} />
           <span>{t.services.basico.btn}</span>
         </a>
       </div>
 
       <div class="plan-card flex flex-col items-center text-center p-10 rounded-2xl border border-purple-400/25 bg-purple-500/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-purple-400/40 hover:shadow-[0_20px_60px_rgba(99,102,241,0.08)] scale-[1.05]">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-br from-purple-600 to-blue-500 whitespace-nowrap">{t.services.profesional.badge}</div>
-        <div class="text-4xl mb-4 mt-2">💼</div>
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-br from-purple-600 to-blue-500 whitespace-nowrap inline-flex items-center gap-1.5"><Sparkles size={14} />{t.services.profesional.badge}</div>
+        <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4 mt-2">
+          <Crown class="text-purple-300" size={28} />
+        </div>
         <h3 class="text-xl font-bold text-white mb-2">{t.services.profesional.name}</h3>
         <p class="text-sm text-purple-200/60 mb-6">{t.services.profesional.desc}</p>
         <div class="mb-6">
@@ -43,16 +49,19 @@ const servicesId = locale === "es" ? "#servicios" : "#servicios";
         </div>
         <ul class="w-full mb-8 flex-1 space-y-0">
           {t.services.profesional.features.map((f: string) => (
-            <li class="py-3 text-sm text-purple-200/60 border-b border-[rgba(148,139,165,0.1)]">✓ {f}</li>
+            <li class="py-3 text-sm text-purple-200/60 border-b border-[rgba(148,139,165,0.1)] flex items-center gap-2"><Check class="text-purple-400 shrink-0" size={14} />{f}</li>
           ))}
         </ul>
         <a href={`https://wa.me/573502815267?text=${t.services.profesional.wa}`} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full px-8 py-3.5 bg-gradient-to-br from-purple-600 to-purple-500 text-white no-underline rounded-xl font-semibold text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,26,255,0.3)]">
+          <MessageCircleWarning size={18} />
           <span>{t.services.profesional.btn}</span>
         </a>
       </div>
 
       <div class="plan-card flex flex-col items-center text-center p-10 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:border-purple-400/25 hover:shadow-[0_20px_60px_rgba(99,102,241,0.08)]">
-        <div class="text-4xl mb-4">🏆</div>
+        <div class="w-14 h-14 rounded-xl bg-purple-500/15 flex items-center justify-center mb-4">
+          <Building class="text-purple-400" size={28} />
+        </div>
         <h3 class="text-xl font-bold text-white mb-2">{t.services.empresarial.name}</h3>
         <p class="text-sm text-purple-200/60 mb-6">{t.services.empresarial.desc}</p>
         <div class="mb-6">
@@ -60,10 +69,11 @@ const servicesId = locale === "es" ? "#servicios" : "#servicios";
         </div>
         <ul class="w-full mb-8 flex-1 space-y-0">
           {t.services.empresarial.features.map((f: string) => (
-            <li class="py-3 text-sm text-purple-200/60 border-b border-[rgba(148,139,165,0.1)]">✓ {f}</li>
+            <li class="py-3 text-sm text-purple-200/60 border-b border-[rgba(148,139,165,0.1)] flex items-center gap-2"><Check class="text-purple-400 shrink-0" size={14} />{f}</li>
           ))}
         </ul>
         <a href={`https://wa.me/573502815267?text=${t.services.empresarial.wa}`} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full px-8 py-3.5 bg-gradient-to-br from-purple-600 to-purple-500 text-white no-underline rounded-xl font-semibold text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,26,255,0.3)]">
+          <MessageCircleWarning size={18} />
           <span>{t.services.empresarial.btn}</span>
         </a>
       </div>
