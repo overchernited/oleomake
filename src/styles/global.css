@@ -20,6 +20,7 @@
 
   body {
     font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
     background: var(--color-dark-950);
     color: #e8e2f0;
     overflow-x: hidden;
@@ -138,6 +139,11 @@
 
   .glow-pulse {
     animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .font-code {
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
   }
 
   .dropdown-hidden {
