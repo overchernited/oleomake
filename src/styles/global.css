@@ -90,4 +90,11 @@
     animation: float 30s ease-in-out infinite;
     opacity: 0.2;
   }
+
+  .dropdown-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(4px) !important;
+    pointer-events: none !important;
+  }
 }
