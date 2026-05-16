@@ -31,42 +31,42 @@ const { items, placeholder, name = "plan" }: { items: PlanItem[]; placeholder: s
 </div>
 
 <script>
-  const trigger = document.getElementById("planTrigger");
-  const menu = document.getElementById("planDropdown");
-  const chevron = document.getElementById("planChevron");
-  const value = document.getElementById("planValue");
-  const text = document.getElementById("planText");
+  var planTrigger = document.getElementById("planTrigger");
+  var planMenu = document.getElementById("planDropdown");
+  var planChevron = document.getElementById("planChevron");
+  var planValue = document.getElementById("planValue");
+  var planText = document.getElementById("planText");
 
-  function close() {
-    menu?.classList.add("dropdown-hidden");
-    chevron?.classList.remove("rotate-180");
+  function closePlan() {
+    planMenu?.classList.add("dropdown-hidden");
+    planChevron?.classList.remove("rotate-180");
   }
 
-  function open() {
-    menu?.classList.remove("dropdown-hidden");
-    chevron?.classList.add("rotate-180");
+  function openPlan() {
+    planMenu?.classList.remove("dropdown-hidden");
+    planChevron?.classList.add("rotate-180");
   }
 
-  trigger?.addEventListener("click", (e) => {
+  planTrigger?.addEventListener("click", function (e) {
     e.stopPropagation();
-    menu?.classList.contains("dropdown-hidden") ? open() : close();
+    planMenu?.classList.contains("dropdown-hidden") ? openPlan() : closePlan();
   });
 
-  document.querySelectorAll(".option-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const val = btn.getAttribute("data-value");
-      const label = btn.querySelector("span")?.textContent || "";
-      if (value) value.value = val;
-      if (text) {
-        text.textContent = label;
-        text.className = "text-white";
+  document.querySelectorAll(".option-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var val = btn.getAttribute("data-value");
+      var label = (btn.querySelector("span")?.textContent || "");
+      if (planValue) planValue.value = val;
+      if (planText) {
+        planText.textContent = label;
+        planText.className = "text-white";
       }
-      close();
-      trigger?.focus();
+      closePlan();
+      planTrigger?.focus();
     });
   });
 
-  document.addEventListener("click", () => {
-    if (!menu?.classList.contains("dropdown-hidden")) close();
+  document.addEventListener("click", function () {
+    if (!planMenu?.classList.contains("dropdown-hidden")) closePlan();
   });
 </script>

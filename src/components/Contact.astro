@@ -60,7 +60,7 @@ const planItems = [
         <form class="flex flex-col gap-4" id="contactForm">
           <div class="relative">
             <User class="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400/50 pointer-events-none" size={18} />
-            <input type="text" placeholder={t.contact.formName} required class="w-full pl-11 pr-5 py-3.5 rounded-xl bg-white/5 border border-purple-400/20 text-white text-[0.95rem] outline-none transition-all duration-300 placeholder:text-white/30 focus:border-purple-400 focus:bg-white/8 focus:shadow-[0_0_0_3px_rgba(139,26,255,0.15)]" />
+            <input type="text" name="name" placeholder={t.contact.formName} required class="w-full pl-11 pr-5 py-3.5 rounded-xl bg-white/5 border border-purple-400/20 text-white text-[0.95rem] outline-none transition-all duration-300 placeholder:text-white/30 focus:border-purple-400 focus:bg-white/8 focus:shadow-[0_0_0_3px_rgba(139,26,255,0.15)]" />
           </div>
           <div class="relative">
             <Mail class="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400/50 pointer-events-none" size={18} />
@@ -71,7 +71,7 @@ const planItems = [
 
           <div class="relative">
             <MessageSquare class="absolute left-4 top-4 text-purple-400/50 pointer-events-none" size={18} />
-            <textarea placeholder={t.contact.formMsg} rows="4" class="w-full pl-11 pr-5 py-3.5 rounded-xl bg-white/5 border border-purple-400/20 text-white text-[0.95rem] outline-none transition-all duration-300 placeholder:text-white/30 focus:border-purple-400 focus:bg-white/8 focus:shadow-[0_0_0_3px_rgba(139,26,255,0.15)] resize-y min-h-[100px]"></textarea>
+            <textarea name="message" placeholder={t.contact.formMsg} rows="4" class="w-full pl-11 pr-5 py-3.5 rounded-xl bg-white/5 border border-purple-400/20 text-white text-[0.95rem] outline-none transition-all duration-300 placeholder:text-white/30 focus:border-purple-400 focus:bg-white/8 focus:shadow-[0_0_0_3px_rgba(139,26,255,0.15)] resize-y min-h-[100px]"></textarea>
           </div>
           <button type="submit" class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-linear-to-br from-purple-600 to-purple-500 text-white no-underline rounded-xl font-semibold text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,26,255,0.3)] cursor-pointer border-none">
             <Send size={18} />
@@ -84,17 +84,16 @@ const planItems = [
 </section>
 
 <script>
-  const form = document.getElementById("contactForm");
-  form?.addEventListener("submit", (e) => {
+  document.getElementById("contactForm")?.addEventListener("submit", function (e) {
     e.preventDefault();
-    const name = form.querySelector('input[type="text"]').value;
-    const message = form.querySelector("textarea").value;
-    const planInput = document.getElementById("planValue");
-    const plan = planInput ? planInput.value : "";
-    const btn = document.querySelector(`.option-btn[data-value="${plan}"]`);
-    const planText = plan && btn ? btn.querySelector("span").textContent || "" : "";
-    const text = `Hola! Soy ${name}. ${plan ? `Me interesa ${planText}. ` : ""}${message ? `Mi proyecto: ${message}` : "Quiero una cotización"}`;
-    window.open(`https://wa.me/573502815267?text=${encodeURIComponent(text)}`, "_blank");
+    var data = new FormData(this);
+    var name = data.get("name") || "";
+    var message = data.get("message") || "";
+    var plan = data.get("plan") || "";
+    var btn = plan ? document.querySelector('[data-value="' + plan + '"]') : null;
+    var planText = btn ? (btn.querySelector("span")?.textContent || "") : "";
+    var text = "Hola! Soy " + name + ". " + (plan ? "Me interesa " + planText + ". " : "") + (message ? "Mi proyecto: " + message : "Quiero una cotizaci\u00f3n");
+    window.open("https://wa.me/573502815267?text=" + encodeURIComponent(text), "_blank");
   });
 </script>
 

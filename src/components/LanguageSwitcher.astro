@@ -21,18 +21,18 @@ const locale = getLocale(Astro.url.pathname);
 </div>
 
 <script>
-  const trigger = document.getElementById("langTrigger");
-  const menu = document.getElementById("langDropdown");
-  const chevron = document.getElementById("langChevron");
-  trigger?.addEventListener("click", (e) => {
+  var langTrigger = document.getElementById("langTrigger");
+  var langMenu = document.getElementById("langDropdown");
+  var langChevron = document.getElementById("langChevron");
+  langTrigger?.addEventListener("click", function (e) {
     e.stopPropagation();
-    menu?.classList.toggle("dropdown-hidden");
-    chevron?.classList.toggle("rotate-180");
+    langMenu?.classList.toggle("dropdown-hidden");
+    langChevron?.classList.toggle("rotate-180");
   });
-  document.addEventListener("click", () => {
-    if (!menu?.classList.contains("dropdown-hidden")) {
-      menu?.classList.add("dropdown-hidden");
-      chevron?.classList.remove("rotate-180");
+  document.addEventListener("click", function () {
+    if (!langMenu?.classList.contains("dropdown-hidden")) {
+      langMenu?.classList.add("dropdown-hidden");
+      langChevron?.classList.remove("rotate-180");
     }
   });
 </script>
