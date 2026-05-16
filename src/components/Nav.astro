@@ -12,7 +12,21 @@ const otherLocale = locale === "es" ? "en" : "es";
         <span class="text-2xl text-purple-400 font-extrabold">◆</span>
         <span class="text-xl font-extrabold text-white">Oleo<span class="text-purple-400">Make</span></span>
       </a>
-      <a href={otherLocale === "es" ? "/" : "/en/"} class="text-sm text-purple-300 font-semibold no-underline px-3 py-1.5 rounded-lg border border-purple-400/30 hover:bg-purple-500/15 transition-all duration-300">{t.lang[otherLocale]}</a>
+      <div class="lang-select relative">
+        <button id="langTrigger" class="flex items-center gap-1.5 text-sm text-purple-300 font-semibold px-3 py-1.5 rounded-lg border border-purple-400/30 hover:bg-purple-500/15 transition-all duration-300 cursor-pointer bg-transparent">
+          <span class="text-base leading-none">{locale === "es" ? "🇪🇸" : "🇺🇸"}</span>
+          <span>{locale.toUpperCase()}</span>
+          <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div id="langDropdown" class="absolute top-full left-0 mt-1.5 min-w-[120px] bg-[rgba(11,13,20,0.95)] backdrop-blur-2xl border border-purple-500/20 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-1 opacity-0 invisible translate-y-1 transition-all duration-200">
+          <a href="/" class="flex items-center gap-2 px-3 py-2 text-sm text-purple-200/70 no-underline transition-colors duration-200 hover:text-white hover:bg-purple-500/10 rounded-lg mx-1 {locale === 'es' ? 'text-purple-300 font-semibold bg-purple-500/10' : ''}">
+            <span class="text-base leading-none">🇪🇸</span> ES
+          </a>
+          <a href="/en/" class="flex items-center gap-2 px-3 py-2 text-sm text-purple-200/70 no-underline transition-colors duration-200 hover:text-white hover:bg-purple-500/10 rounded-lg mx-1 {locale === 'en' ? 'text-purple-300 font-semibold bg-purple-500/10' : ''}">
+            <span class="text-base leading-none">🇺🇸</span> EN
+          </a>
+        </div>
+      </div>
     </div>
     <div class="flex items-center gap-4">
       <button class="menu-toggle flex md:hidden flex-col gap-1.5 bg-transparent border-none cursor-pointer p-1" id="menuToggle" aria-label="Menú">
@@ -42,6 +56,26 @@ const otherLocale = locale === "es" ? "en" : "es";
       links?.classList.remove("active");
       toggle?.classList.remove("open");
     });
+  });
+
+  const langTrigger = document.getElementById("langTrigger");
+  const langDropdown = document.getElementById("langDropdown");
+  langTrigger?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    langDropdown?.classList.toggle("opacity-0");
+    langDropdown?.classList.toggle("invisible");
+    langDropdown?.classList.toggle("translate-y-1");
+    langDropdown?.classList.toggle("opacity-100");
+    langDropdown?.classList.toggle("visible");
+    langDropdown?.classList.toggle("translate-y-0");
+    langTrigger.querySelector("svg")?.classList.toggle("rotate-180");
+  });
+  document.addEventListener("click", () => {
+    if (langDropdown?.classList.contains("opacity-100")) {
+      langDropdown.classList.add("opacity-0", "invisible", "translate-y-1");
+      langDropdown.classList.remove("opacity-100", "visible", "translate-y-0");
+      langTrigger.querySelector("svg")?.classList.remove("rotate-180");
+    }
   });
 </script>
 
