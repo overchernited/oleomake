@@ -1,0 +1,43 @@
+---
+import { getLocale, getTranslations } from "../i18n";
+const locale = getLocale(Astro.url.pathname);
+const t = getTranslations(locale);
+---
+
+<footer class="py-16 pb-8 relative border-t border-[rgba(148,139,165,0.1)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-12 mb-12">
+      <div>
+        <a href={locale === "en" ? "/en/" : "/"} class="flex items-center gap-2 no-underline">
+          <span class="text-2xl text-purple-400 font-extrabold">◆</span>
+          <span class="text-xl font-extrabold text-white">Oleo<span class="text-purple-400">Make</span></span>
+        </a>
+        <p class="text-sm text-purple-200/60 leading-relaxed mt-4 max-w-[350px]">
+          {t.footer.desc}
+        </p>
+      </div>
+      <div>
+        <h4 class="text-base font-bold text-white mb-5">{t.footer.nav}</h4>
+        <a href={locale === "en" ? "/en/#hero" : "#inicio"} class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.navHome}</a>
+        <a href={locale === "en" ? "/en/#services" : "#servicios"} class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.navServices}</a>
+        <a href={locale === "en" ? "/en/#contacto" : "#contacto"} class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.navContact}</a>
+      </div>
+      <div>
+        <h4 class="text-base font-bold text-white mb-5">{t.footer.contact}</h4>
+        <a href="https://wa.me/573502815267" target="_blank" rel="noopener" class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.whatsapp}</a>
+        <span class="block text-sm text-purple-200/60 mb-3">{t.footer.email}</span>
+        <span class="block text-sm text-purple-200/60">{t.footer.country}</span>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[rgba(148,139,165,0.1)] text-sm text-purple-200/60">
+      <p>{t.footer.copyright}</p>
+      <div class="flex gap-4 mt-4 md:mt-0">
+        <a href="https://wa.me/573502815267" target="_blank" rel="noopener" aria-label="WhatsApp" class="text-xl no-underline opacity-70 transition-opacity duration-300 hover:opacity-100">📱</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer { opacity: 0; }
+</style>

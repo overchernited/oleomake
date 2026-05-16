@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-950: #0b0d14;
+  --color-dark-900: #10121b;
+  --color-dark-800: #161822;
+  --color-purple-700: #5b21b6;
+  --color-purple-600: #7c3aed;
+  --color-purple-500: #9333ea;
+  --color-purple-400: #a855f7;
+  --color-purple-300: #c084fc;
+  --color-purple-200: #d8b4fe;
+  --color-blue-600: #4f46e5;
+  --color-blue-500: #6366f1;
+  --color-blue-400: #818cf8;
+}
+
+@layer base {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--color-dark-950);
+    color: #e8e2f0;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.18), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(99, 102, 241, 0.08), transparent),
+      radial-gradient(ellipse 50% 30% at 20% 100%, rgba(168, 85, 247, 0.05), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  ::selection {
+    background: #9333ea;
+    color: #fff;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 139, 165, 0.12);
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+  }
+
+  .blob-1 {
+    width: 600px; height: 600px;
+    background: linear-gradient(135deg, #9333ea, #a855f7);
+    top: -15%; right: -15%;
+    animation: float 20s ease-in-out infinite;
+    opacity: 0.3;
+  }
+
+  .blob-2 {
+    width: 500px; height: 500px;
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    bottom: -15%; left: -15%;
+    animation: float 25s ease-in-out infinite reverse;
+    opacity: 0.2;
+  }
+
+  .blob-3 {
+    width: 400px; height: 400px;
+    background: linear-gradient(135deg, rgba(148, 139, 165, 0.4), rgba(99, 102, 241, 0.2));
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 30s ease-in-out infinite;
+    opacity: 0.2;
+  }
+}

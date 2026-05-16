@@ -1,0 +1,57 @@
+---
+import { getLocale, getTranslations } from "../i18n";
+const locale = getLocale(Astro.url.pathname);
+const t = getTranslations(locale);
+const servicesId = locale === "es" ? "#servicios" : "#servicios";
+---
+
+<section class="hero min-h-screen flex items-center relative overflow-hidden pt-20" id="inicio">
+  <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_100%_50%_at_50%_0%,rgba(124,58,237,0.25),transparent),radial-gradient(ellipse_80%_40%_at_50%_100%,rgba(147,51,234,0.15),transparent)]"></div>
+  <div class="hero-glow parallax absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(147,51,234,0.1),transparent_70%)] pointer-events-none" data-depth="-15"></div>
+  <div class="blob blob-1 parallax" data-depth="25"></div>
+  <div class="blob blob-2 parallax" data-depth="-20"></div>
+  <div class="max-w-6xl mx-auto px-6 text-center flex flex-col items-center gap-6 relative z-10">
+    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm text-purple-200 bg-purple-500/15 backdrop-blur-md border border-purple-400/30">
+      <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+      {t.hero.badge}
+    </div>
+    <h1 class="hero-title text-white font-black leading-[1.1] tracking-tight" style="font-size: clamp(2.5rem, 8vw, 4.5rem);">
+      {t.hero.title1}
+      <br />
+      <span class="bg-gradient-to-br from-purple-400 to-purple-200 bg-clip-text text-transparent">{t.hero.title2}</span>
+    </h1>
+    <p class="hero-subtitle max-w-[600px] text-lg leading-relaxed text-[rgba(232,226,240,0.75)]" style="font-size: clamp(1rem, 2vw, 1.25rem);" set:html={t.hero.desc} />
+    <div class="hero-actions flex gap-4 flex-wrap justify-center">
+      <a href={`https://wa.me/573502815267?text=${t.hero.waCta}`} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-br from-purple-600 to-purple-500 text-white no-underline rounded-xl font-semibold text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,26,255,0.3)]">
+        <span>{t.hero.cta}</span>
+      </a>
+      <a href={servicesId} class="inline-flex items-center px-8 py-3.5 text-white no-underline rounded-xl font-semibold text-base bg-purple-500/15 border border-purple-400/35 transition-all duration-300 hover:bg-purple-500/25 hover:border-purple-400 hover:-translate-y-0.5">
+        {t.hero.verServicios}
+      </a>
+    </div>
+    <div class="hero-stats flex items-center gap-8 px-10 py-5 rounded-2xl mt-8 bg-purple-500/10 backdrop-blur-xl border border-purple-400/20">
+      <div class="flex flex-col items-center gap-1">
+        <span class="text-2xl font-extrabold text-purple-300">50+</span>
+        <span class="text-sm text-[rgba(232,226,240,0.6)]">{t.hero.proyectos}</span>
+      </div>
+      <div class="w-px h-10 bg-purple-400/25"></div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="text-2xl font-extrabold text-purple-300">100%</span>
+        <span class="text-sm text-[rgba(232,226,240,0.6)]">{t.hero.satisfaccion}</span>
+      </div>
+      <div class="w-px h-10 bg-purple-400/25"></div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="text-2xl font-extrabold text-purple-300">24/7</span>
+        <span class="text-sm text-[rgba(232,226,240,0.6)]">{t.hero.soporte}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-title, .hero-subtitle, .hero-actions, .hero-stats { opacity: 0; }
+  @media (max-width: 768px) {
+    .hero-stats { flex-direction: column; gap: 1rem; padding: 1.25rem 2rem; }
+    .hero-stats .w-px { width: 40px; height: 1px; }
+  }
+</style>
