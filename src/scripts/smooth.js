@@ -15,6 +15,8 @@ const lenis = new Lenis({
 
 lenis.on("scroll", ScrollTrigger.update);
 
+window.lenis = lenis;
+
 function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
@@ -95,4 +97,15 @@ ScrollTrigger.batch(".footer", {
       { y: 40, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", overwrite: true }
     ),
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const href = link.getAttribute("href");
+    if (href?.startsWith("#") && window.lenis) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) window.lenis.scrollTo(target);
+    }
+  });
 });
