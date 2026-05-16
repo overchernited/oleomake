@@ -1,43 +1,82 @@
 ---
 import { getLocale, getTranslations } from "../i18n";
+import { MessageCircle, Mail, MapPin, ArrowUp, ArrowUpRight } from "@lucide/astro";
 const locale = getLocale(Astro.url.pathname);
 const t = getTranslations(locale);
 ---
 
-<footer class="py-16 pb-8 relative border-t border-[rgba(148,139,165,0.1)]">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-12 mb-12">
+<footer class="footer py-20 relative border-t border-purple-500/10 overflow-hidden">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(124,58,237,0.06),transparent)] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.8fr_1fr_1fr_1fr] gap-12 mb-16">
       <div>
-        <a href={locale === "en" ? "/en/" : "/"} class="flex items-center gap-2 no-underline">
-          <span class="text-2xl text-purple-400 font-extrabold">◆</span>
+        <a href={locale === "en" ? "/en/" : "/"} class="flex items-center gap-2 no-underline group">
+          <span class="text-2xl text-purple-400 font-extrabold group-hover:scale-110 transition-transform duration-300">◆</span>
           <span class="text-xl font-extrabold text-white">Oleo<span class="text-purple-400">Make</span></span>
         </a>
-        <p class="text-sm text-purple-200/60 leading-relaxed mt-4 max-w-[350px]">
+        <p class="text-sm text-purple-300/50 leading-relaxed mt-4 max-w-[320px]">
           {t.footer.desc}
         </p>
+        <div class="flex gap-3 mt-6">
+          <a href="https://wa.me/573502815267" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 no-underline transition-all duration-300 hover:bg-purple-500/25 hover:scale-110 hover:-translate-y-0.5">
+            <MessageCircle size={18} />
+          </a>
+          <a href="mailto:oleomake@gmail.com" aria-label="Email" class="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 no-underline transition-all duration-300 hover:bg-purple-500/25 hover:scale-110 hover:-translate-y-0.5">
+            <Mail size={18} />
+          </a>
+        </div>
       </div>
+
       <div>
-        <h4 class="text-base font-bold text-white mb-5">{t.footer.nav}</h4>
-        <a href={locale === "en" ? "/en/#hero" : "#inicio"} class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.navHome}</a>
-        <a href={locale === "en" ? "/en/#services" : "#servicios"} class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.navServices}</a>
-        <a href={locale === "en" ? "/en/#contacto" : "#contacto"} class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.navContact}</a>
+        <h4 class="text-sm font-bold text-white/80 uppercase tracking-widest mb-6">{t.footer.nav}</h4>
+        <div class="flex flex-col gap-3">
+          <a href={locale === "en" ? "/en/#hero" : "#inicio"} class="text-sm text-purple-300/50 no-underline transition-all duration-300 hover:text-purple-300 hover:translate-x-1 inline-block">{t.footer.navHome}</a>
+          <a href={locale === "en" ? "/en/#services" : "#servicios"} class="text-sm text-purple-300/50 no-underline transition-all duration-300 hover:text-purple-300 hover:translate-x-1 inline-block">{t.footer.navServices}</a>
+          <a href={locale === "en" ? "/en/#contacto" : "#contacto"} class="text-sm text-purple-300/50 no-underline transition-all duration-300 hover:text-purple-300 hover:translate-x-1 inline-block">{t.footer.navContact}</a>
+        </div>
       </div>
+
       <div>
-        <h4 class="text-base font-bold text-white mb-5">{t.footer.contact}</h4>
-        <a href="https://wa.me/573502815267" target="_blank" rel="noopener" class="block text-sm text-purple-200/60 no-underline mb-3 transition-colors duration-300 hover:text-purple-300">{t.footer.whatsapp}</a>
-        <span class="block text-sm text-purple-200/60 mb-3">{t.footer.email}</span>
-        <span class="block text-sm text-purple-200/60">{t.footer.country}</span>
+        <h4 class="text-sm font-bold text-white/80 uppercase tracking-widest mb-6">{t.footer.contact}</h4>
+        <div class="flex flex-col gap-3">
+          <a href="https://wa.me/573502815267" target="_blank" rel="noopener" class="flex items-center gap-2 text-sm text-purple-300/50 no-underline transition-all duration-300 hover:text-purple-300 hover:translate-x-1">
+            <MessageCircle size={14} class="shrink-0" />
+            <span>{t.footer.whatsapp}</span>
+          </a>
+          <div class="flex items-center gap-2 text-sm text-purple-300/50">
+            <Mail size={14} class="shrink-0" />
+            <span>{t.footer.email}</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-purple-300/50">
+            <MapPin size={14} class="shrink-0" />
+            <span>{t.footer.country}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white/80 uppercase tracking-widest mb-6">{t.footer.newsletter || "Newsletter"}</h4>
+        <p class="text-sm text-purple-300/50 leading-relaxed mb-4">{t.footer.newsletterDesc || "Recibe las últimas novedades y ofertas exclusivas."}</p>
+        <form class="flex gap-2" onsubmit="event.preventDefault();alert('¡Gracias por suscribirte!')">
+          <input type="email" placeholder={locale === "en" ? "your@email.com" : "tu@email.com"} required class="flex-1 px-3 py-2 text-sm rounded-lg bg-white/5 border border-purple-400/20 text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-purple-400 focus:shadow-[0_0_0_3px_rgba(139,26,255,0.15)]" />
+          <button type="submit" class="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold border-none cursor-pointer transition-all duration-300 hover:bg-purple-500 hover:-translate-y-0.5 shrink-0">
+            <ArrowUpRight size={16} />
+          </button>
+        </form>
       </div>
     </div>
-    <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[rgba(148,139,165,0.1)] text-sm text-purple-200/60">
-      <p>{t.footer.copyright}</p>
-      <div class="flex gap-4 mt-4 md:mt-0">
-        <a href="https://wa.me/573502815267" target="_blank" rel="noopener" aria-label="WhatsApp" class="text-xl no-underline opacity-70 transition-opacity duration-300 hover:opacity-100">📱</a>
-      </div>
+
+    <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-purple-500/10 text-sm text-purple-300/40">
+      <p>&copy; {new Date().getFullYear()} OleoMake. {t.footer.copyright}</p>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="mt-4 md:mt-0 inline-flex items-center gap-1.5 text-purple-400 bg-transparent border-none cursor-pointer text-sm transition-all duration-300 hover:text-purple-300 hover:gap-2.5">
+        <span>Back to top</span>
+        <ArrowUp size={14} />
+      </button>
     </div>
   </div>
 </footer>
 
 <style>
-  footer { opacity: 0; }
+  .footer { opacity: 0; }
 </style>
