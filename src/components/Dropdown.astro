@@ -72,11 +72,11 @@ const hids = items.map((_, i) => `${id}H${i}`);
   </div>
 </div>
 
-<script>
-  (function (d, id, mode) {
-    var trigger = d.getElementById(id + "T");
-    var menu = d.getElementById(id + "M");
-    var chevron = d.getElementById(id + "C");
+<script define:vars={{ id, mode }}>
+  (function () {
+    var trigger = document.getElementById(id + "T");
+    var menu = document.getElementById(id + "M");
+    var chevron = document.getElementById(id + "C");
     if (!trigger || !menu) return;
 
     function close() { menu.classList.add("dropdown-hidden"); chevron?.classList.remove("rotate-180"); }
@@ -87,14 +87,14 @@ const hids = items.map((_, i) => `${id}H${i}`);
       menu.classList.contains("dropdown-hidden") ? open() : close();
     });
 
-    d.addEventListener("click", function () {
+    document.addEventListener("click", function () {
       if (!menu.classList.contains("dropdown-hidden")) close();
     });
 
     if (mode === "select") {
-      var valueInput = d.getElementById(id + "V");
-      var textSpan = d.getElementById(id + "X");
-      d.querySelectorAll("#" + id + "M .option-btn").forEach(function (btn) {
+      var valueInput = document.getElementById(id + "V");
+      var textSpan = document.getElementById(id + "X");
+      document.querySelectorAll("#" + id + "M .option-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
           var val = btn.getAttribute("data-value");
           var label = (btn.querySelector("span")?.textContent || "");
@@ -105,5 +105,5 @@ const hids = items.map((_, i) => `${id}H${i}`);
         });
       });
     }
-  })(document, "{id}", "{mode}");
+  })();
 </script>
